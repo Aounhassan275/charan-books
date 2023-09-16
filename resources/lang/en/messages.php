@@ -1988,4 +1988,9 @@
   'Temporary login block time refers to a security measure implemented by systems to restrict access for a specified period of time for wrong Password submission.' => 'Temporary login block time refers to a security measure implemented by systems to restrict access for a specified period of time for wrong Password submission.',
   'wallet_transactions' => 'Wallet transactions',
   'Sub Category Deleted Successfully!' => 'Sub Category Deleted Successfully!',
+  'Add new publisher' => 'Add new publisher',
+  'Publisher Added Successfully!' => 'Publisher Added Successfully!',
+  'Publisher Deleted Successfully!' => 'Publisher Deleted Successfully!',
+  'Add new author' => 'Add new author',
+  'Author Deleted Successfully!' => 'Author Deleted Successfully!',
 );

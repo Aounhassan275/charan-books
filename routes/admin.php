@@ -206,6 +206,8 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
         });
         Route::group(['middleware'=>['module:product_management']], function () {
             Route::resource('sub-category', 'SubCategoryController');
+            Route::resource('publisher', 'PublisherController');
+            Route::resource('author', 'AuthorController');
             Route::post('sub-category/get_sub_categories', 'SubCategoryController@getSubCategories')->name('sub-category.get_sub_categories');
         });
 

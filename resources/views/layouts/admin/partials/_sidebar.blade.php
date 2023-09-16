@@ -268,7 +268,26 @@
                                 </ul>
                             </li>
                             <!-- End Pages -->
-
+                            <li class="navbar-vertical-aside-has-menu {{Request::is('admin/publisher*')?'active':''}}">
+                                <a class="js-navbar-vertical-aside-menu-link nav-link"
+                                   href="{{route('admin.publisher.index')}}"
+                                   title="publisher"
+                                >
+                                    <i class="tio-image nav-icon"></i>
+                                    <span
+                                        class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Publisher</span>
+                                </a>
+                            </li>
+                            <li class="navbar-vertical-aside-has-menu {{Request::is('admin/author*')?'active':''}}">
+                                <a class="js-navbar-vertical-aside-menu-link nav-link"
+                                   href="{{route('admin.author.index')}}"
+                                   title="author"
+                                >
+                                    <i class="tio-image nav-icon"></i>
+                                    <span
+                                        class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Author</span>
+                                </a>
+                            </li>
                             <!-- Pages -->
                             <li class="navbar-vertical-aside-has-menu {{Request::is('admin/product*') || Request::is('admin/attribute*')?'active':''}}">
                                 <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle"

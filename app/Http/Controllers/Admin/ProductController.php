@@ -11,6 +11,7 @@ use App\Model\Product;
 use App\Model\Review;
 use App\Model\Tag;
 use App\Model\Translation;
+use App\Model\SubCategory;
 use Box\Spout\Common\Exception\InvalidArgumentException;
 use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Exception\UnsupportedTypeException;
@@ -92,6 +93,18 @@ class ProductController extends Controller
         }
         return response()->json([
             'options' => $res,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function get_sub_categories(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $categories = SubCategory::where('sub_category_id',$request->id)->get();
+        return response()->json([
+            'categories' => $categories
         ]);
     }
 
@@ -220,6 +233,16 @@ class ProductController extends Controller
             }
         }
 
+        if(isset($tags)){
+            foreach ($tags as $key => $value) {
+                $tag = $this->tag->firstOrNew(
+                    ['tag' => $value]
+                );
+                $tag->save();
+                $tag_ids[] = $tag->id;
+            }
+        }
+
         $p = $this->product;
         $p->name = $request->name[array_search('en', $request->lang)];
 
@@ -236,14 +259,19 @@ class ProductController extends Controller
                 'position' => 2,
             ];
         }
-        if ($request->sub_sub_category_id != null) {
-            $category[] = [
-                'id' => $request->sub_sub_category_id,
-                'position' => 3,
-            ];
-        }
-
         $p->category_ids = json_encode($category);
+        if ($request->author_ids) {
+            $p->author_ids = json_encode($request->author_ids);
+
+        }
+        $p->sub_sub_category_id = $request->sub_sub_category_id;
+        $p->publisher_id = $request->publisher_id;
+        $p->binding = $request->binding;
+        $p->isbn = $request->isbn;
+        $p->edition = $request->edition;
+        $p->pubhlishing_date = $request->pubhlishing_date;
+        $p->language = $request->language;
+        $p->book_status = $request->book_status;
         $p->description = $request->description[array_search('en', $request->lang)];
 
         $choice_options = [];
@@ -372,7 +400,8 @@ class ProductController extends Controller
         $product = $this->product->withoutGlobalScopes()->with('translations')->find($id);
         $product_category = json_decode($product->category_ids);
         $categories = $this->category->where(['parent_id' => 0])->get();
-        return view('admin-views.product.edit', compact('product', 'product_category', 'categories'));
+        $author_ids = json_decode($product->author_ids);
+        return view('admin-views.product.edit', compact('product', 'product_category', 'categories','author_ids'));
     }
 
     /**

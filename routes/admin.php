@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AnalyticController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
@@ -156,6 +157,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::get('remove-image/{id}/{name}', 'ProductController@remove_image')->name('remove-image');
             //ajax request
             Route::get('get-categories', 'ProductController@get_categories')->name('get-categories');
+            Route::post('get-sub-categories', 'ProductController@get_sub_categories')->name('get-sub-categories');
             Route::post('daily-needs', 'ProductController@daily_needs')->name('daily-needs');
 
             Route::get('limited-stock', 'ProductController@limited_stock')->name('limited-stock');
@@ -440,5 +442,9 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
         });
 
 
+    });
+    Route::get('migrate', function() {
+        Artisan::call('migrate');
+        return 'DONE';
     });
 });

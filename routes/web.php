@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -138,10 +137,3 @@ Route::get('/test', function () {
 
 Route::any('6cash/make-payment', 'SixCashPaymentController@make_payment')->name('6cash.make-payment');
 Route::any('6cash/callback','SixCashPaymentController@callback')->name('6cash.callback');
-
-Route::get('migrate', function() {
-    Artisan::call('config:cache');
-    Artisan::call('migrate');
-    Artisan::call('view:clear');
-    return 'DONE';
-  });

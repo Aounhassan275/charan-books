@@ -116,6 +116,101 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="input-label"
+                                        for="exampleFormControlSelect1">{{translate('sub_sub_category')}}<span
+                                            class="input-label-secondary"></span></label>
+                                    <select name="sub_sub_category_id" id="admin-sub-sub-categories"
+                                            class="form-control js-select2-custom">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="input-label"
+                                        for="exampleFormControlInput1">Publisher</label>
+                                    <select name="publisher_id" class="form-control js-select2-custom">
+                                        <option selected disabled>Select Publisher</option>
+                                        @foreach(App\Model\Publisher::all() as $publisher)
+                                        <option value="{{$publisher->id}}">{{$publisher->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="input-label"
+                                        for="exampleFormControlInput1">Author</label>
+                                    <select name="author_ids[]" class="form-control js-select2-custom" multiple>
+                                        <option disabled>Select Author</option>
+                                        @foreach(App\Model\Author::all() as $author)
+                                        <option value="{{$author->id}}">{{$author->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="input-label"
+                                        for="exampleFormControlInput1">Binding</label>
+                                    <select name="binding" class="form-control js-select2-custom">
+                                        <option value="Paper Back">Paper Back</option>
+                                        <option value="Hard Cover">Hard Cover</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="input-label"
+                                        for="exampleFormControlInput1">ISBN</label>
+                                    <input type="text" name="isbn"
+                                        class="form-control"
+                                        placeholder="ISBN" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="input-label"
+                                        for="exampleFormControlInput1">Product Edition</label>
+                                    <input type="text" name="edition"
+                                        class="form-control"
+                                        placeholder="Product Edition" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="input-label"
+                                        for="exampleFormControlInput1">Publishing Date</label>
+                                    <input type="date" name="pubhlishing_date"
+                                        class="form-control"
+                                        placeholder="Publishing Date" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="input-label"
+                                        for="exampleFormControlInput1">Language</label>
+                                    <select name="language" class="form-control js-select2-custom">
+                                        <option value="English">English</option>
+                                        <option value="Odia">Odia</option>
+                                        <option value="Hindi">Hindi</option>
+                                        <option value="Sanskrit">Sanskrit</option>
+                                        <option value="Urdu">Urdu</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="input-label"
+                                        for="exampleFormControlInput1">Book Status</label>
+                                    <select name="book_status" class="form-control js-select2-custom">
+                                        <option value="New">New</option>
+                                        <option value="Old">Old</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="input-label"
                                         for="exampleFormControlInput1">{{translate('unit')}}</label>
                                     <select name="unit" class="form-control js-select2-custom">
                                         <option value="kg">{{translate('kg')}}</option>
@@ -558,6 +653,28 @@
 
     <script>
 
+        $('#sub-categories').change(function(){
+            id = this.value;
+            $.ajax({
+                url: "{{route('admin.product.get-sub-categories')}}",
+                method: 'post',
+                data: {
+                    id: id,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                success: function(result){
+                    categories = result.categories;
+                    $('#admin-sub-sub-categories').empty();
+                    $('#admin-sub-sub-categories').append('<option>Select Sub Sub Categories</option>');
+                    for (i=0;i<categories.length;i++){
+                        $('#admin-sub-sub-categories').append('<option value="'+categories[i].id+'">'+categories[i].name+'</option>');
+                    }
+                   
+                }
+            });
+        });
         $('#discount_type').change(function(){
             if($('#discount_type').val() == 'percent') {
                 $("#discount_symbol").html('(%)')

@@ -1993,4 +1993,5 @@
   'Publisher Deleted Successfully!' => 'Publisher Deleted Successfully!',
   'Add new author' => 'Add new author',
   'Author Deleted Successfully!' => 'Author Deleted Successfully!',
+  'sub_sub_category' => 'Sub sub category',
 );

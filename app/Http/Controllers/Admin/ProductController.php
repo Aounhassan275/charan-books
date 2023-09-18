@@ -521,6 +521,18 @@ class ProductController extends Controller
         }
 
         $p->category_ids = json_encode($category);
+        if ($request->author_ids) {
+            $p->author_ids = json_encode($request->author_ids);
+
+        }
+        $p->sub_sub_category_id = $request->sub_sub_category_id;
+        $p->publisher_id = $request->publisher_id;
+        $p->binding = $request->binding;
+        $p->isbn = $request->isbn;
+        $p->edition = $request->edition;
+        $p->pubhlishing_date = $request->pubhlishing_date;
+        $p->language = $request->language;
+        $p->book_status = $request->book_status;
         $p->description = $request->description[array_search('en', $request->lang)];
 
         $choice_options = [];

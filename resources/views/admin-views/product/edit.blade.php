@@ -134,7 +134,7 @@
                                     <select name="sub_sub_category_id" id="admin-sub-sub-categories"
                                             class="form-control js-select2-custom">
                                         @foreach(App\Model\SubCategory::where('sub_category_id',$product_category[1]->id)->get() as $sub_category)
-                                            <option {{@$product_category[0]->id == $sub_category->id ? 'selected' : ''}} value="{{$sub_category->id}}">{{$sub_category->name}}</option>
+                                            <option {{@$product_category[1]->id == $sub_category->id ? 'selected' : ''}} value="{{$sub_category->id}}">{{$sub_category->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

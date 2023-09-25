@@ -218,6 +218,43 @@
                 </div>
             </div>
         </div>
+        <div class="card mb-3 text-sm">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-borderless table-thead-bordered product--desc-table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="px-4 border-0"><h4 class="m-0 text-capitalize">Publisher</h4></th>
+                                <th class="px-4 border-0"><h4 class="m-0 text-capitalize">Authors</h4></th>
+                                <th class="px-4 border-0"><h4 class="m-0 text-capitalize">Binding</h4></th>
+                                <th class="px-4 border-0"><h4 class="m-0 text-capitalize">ISBN</h4></th>
+                                <th class="px-4 border-0"><h4 class="m-0 text-capitalize">Product Edition</h4></th>
+                                <th class="px-4 border-0"><h4 class="m-0 text-capitalize">Publishing Date</h4></th>
+                                <th class="px-4 border-0"><h4 class="m-0 text-capitalize">Language</h4></th>
+                                <th class="px-4 border-0"><h4 class="m-0 text-capitalize">Book Status</h4></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {{@$product['publisher']->name}}
+                                </td>
+                                <td>@foreach($authors as $author)
+                                        <span class="badge-soft-success mb-1 mr-1 d-inline-block px-2 py-1 rounded" >{{$author->name}} </span> <br>
+                                    @endforeach
+                                </td>
+                                <td>{{@$product['binding']}}</td>
+                                <td>{{@$product['isbn']}}</td>
+                                <td>{{@$product['edition']}}</td>
+                                <td>{{@$product['pubhlishing_date']}}</td>
+                                <td>{{@$product['language']}}</td>
+                                <td>{{@$product['book_status']}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
         <!-- Card -->
         <div class="card">

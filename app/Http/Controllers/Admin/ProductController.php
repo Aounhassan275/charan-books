@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\CentralLogics\Helpers;
 use App\Http\Controllers\Controller;
+use App\Model\Author;
 use App\Model\BusinessSetting;
 use App\Model\Category;
 use App\Model\FlashDealProduct;
@@ -177,7 +178,9 @@ class ProductController extends Controller
     {
         $product = $this->product->where(['id' => $id])->first();
         $reviews = $this->review->where(['product_id' => $id])->latest()->paginate(20);
-        return view('admin-views.product.view', compact('product', 'reviews'));
+        $author_ids = json_decode($product->author_ids);
+        $authors = Author::whereIn('id',$author_ids)->get();
+        return view('admin-views.product.view', compact('product', 'reviews','authors'));
     }
 
     /**

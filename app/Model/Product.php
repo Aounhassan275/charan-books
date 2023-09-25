@@ -80,6 +80,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
-
+    public function publisher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Publisher::class);
+    }
 
 }
